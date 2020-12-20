@@ -5,3 +5,7 @@
 <h4 align="center"> 
 	🚧  Getting Started  🚧
 </h4>
+
+- [x] Downloading videos
+- [x] Url verification
+- [ ] Downloading a list of videos
