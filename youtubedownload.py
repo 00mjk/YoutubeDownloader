@@ -1,19 +1,45 @@
-import pytube 
+import pytube
+import re 
 
-url = "https://www.youtube.com/watch?v=UjTv8ivh7mY"
-
-video = pytube.YouTube(url).streams
+# Testing this
+# https://www.youtube.com/watch?v=UjTv8ivh7mY
 
 def downloadVideo(video):
-    video.filter(audio_codec="mp4a.40.2", type="video").first().download(filename="Video") 
+    video.filter(audio_codec="mp4a.40.2", type="video").first().download(filename="Video")
 
-choose = input(f"Do you want to download *{url}* ?\n>").lower()
+def youtube_url_validation(url):
+    youtube_regex = (r'(https?://)?(www\.)?'
+                    '(youtube|youtu|youtube-nocookie)\.(com|be)/'
+                    '(watch\?.*?(?=v=)v=|embed/|v/|.+\?v=)?([^&=%\?]{11})')
 
-if choose == "yes" or choose == "y":
-    print("Downloading...")
-    downloadVideo(video)
-    print("Download Complete!")
-elif choose == "no" or choose == "n":
-    print("Download Canceled!")
-else:
-    print("Invalid Operation!")
+    youtube_regex_match = re.match(youtube_regex, url)
+    
+    if youtube_regex_match:
+        return youtube_regex_match
+    else:
+        return "Invalid url!"
+
+while True:
+    url = input("Insert your url: \n> ")
+    
+    try:
+        youtube_url_validation(url)
+    except ValueError as e:
+        print("e")
+    else:
+        pass
+
+    video = pytube.YouTube(url).streams 
+
+    choose = input(f"Download *{url}* ?\n> ").lower()
+
+    if choose == "yes" or choose == "y":
+        print("Downloading...")
+        downloadVideo(video)
+        print("Download Complete!")
+        break
+    elif choose == "no" or choose == "n":
+        print("Download Canceled!")
+        break
+    else:
+        print("Invalid Operation!")
