@@ -4,7 +4,7 @@ import re
 # Testing this
 # https://www.youtube.com/watch?v=UjTv8ivh7mY
 
-def downloadVideo(video):
+def download_video(video):
     video.filter(audio_codec="mp4a.40.2", type="video").first().download(filename="Video")
 
 def youtube_url_validation(url):
@@ -35,11 +35,9 @@ while True:
 
     if choose == "yes" or choose == "y":
         print("Downloading...")
-        downloadVideo(video)
+        download_video(video)
         print("Download Complete!")
-        break
     elif choose == "no" or choose == "n":
         print("Download Canceled!")
-        break
     else:
         print("Invalid Operation!")
