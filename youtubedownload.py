@@ -8,6 +8,7 @@ def download_video(video):
     video.filter(audio_codec="mp4a.40.2", type="video").first().download(filename="Video")
 
 def youtube_url_validation(url):
+    
     youtube_regex = (r'(https?://)?(www\.)?'
                     '(youtube|youtu|youtube-nocookie)\.(com|be)/'
                     '(watch\?.*?(?=v=)v=|embed/|v/|.+\?v=)?([^&=%\?]{11})')
@@ -37,7 +38,10 @@ while True:
         print("Downloading...")
         download_video(video)
         print("Download Complete!")
+        break
     elif choose == "no" or choose == "n":
         print("Download Canceled!")
+        break
     else:
         print("Invalid Operation!")
+        break
